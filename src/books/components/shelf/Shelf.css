@@ -1,0 +1,15 @@
+.Shelf {
+}
+
+.Shelf .books {
+    display: flex;
+}
+
+.Shelf .books > .BookItem {
+    padding: 2rem 0;
+    margin-right: 2rem;
+}
+
+.Shelf .placeholder-text {
+    color: #9C9EB2;
+}

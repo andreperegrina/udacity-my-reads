@@ -1,0 +1,10 @@
+.BookItem {
+    width: 250px;
+    cursor: pointer;
+}
+
+.BookItem-Options h5{
+    margin:0;
+    padding: 0 0.5rem 0.5rem 0.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}

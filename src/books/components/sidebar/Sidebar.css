@@ -1,0 +1,49 @@
+.Sidebar {
+    width: 180px;
+    border-right: 1px solid #9F9FBD;
+    height: 100%;
+    padding: 0 2.5rem;
+}
+
+.Sidebar .title {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Sidebar .title .h1 {
+    text-align: center;
+    margin: 0;
+}
+
+.Sidebar .book-status {
+    margin-top: 3rem;
+}
+
+.Sidebar .book-status div {
+    padding: 0.5rem 0;
+    text-align: left;
+}
+
+.Sidebar .book-category {
+    margin-top: 5rem;
+}
+.Sidebar .book-category ul{
+    color:#9C9EB2;
+    list-style-type: none;
+    padding: 0;
+}
+.Sidebar .book-category ul li{
+    cursor: pointer;
+    padding: 0.5rem 0;
+}
+
+.Sidebar .book-category ul li.active{
+    color: #4A4A4A;
+}
+
+.Sidebar .book-category div {
+    margin-top: 0.5rem;
+    text-align: left;
+}
