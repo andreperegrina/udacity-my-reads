@@ -11,6 +11,8 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import Typography from "@material-ui/core/Typography";
 import MoreHoriz from '@material-ui/icons/MoreHoriz';
+import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
 // Style
 import './BookItem.css'
@@ -34,10 +36,13 @@ class BookItem extends Component {
    };
 
    render() {
+      const {book, onMoveShelf, shelf} = this.props;
+      const {imageLinks, title, authors} = book;
+      const subtitle = authors.join(',');
+      const imageURL = imageLinks.thumbnail;
       const {anchorElOptions} = this.state;
       const isOptionsOpen = anchorElOptions != null;
       const id = isOptionsOpen ? 'options-popover' : undefined;
-      const {imageURL, title, subtitle} = this.props;
       return (
          <div className='BookItem'>
             <Card>
@@ -58,12 +63,12 @@ class BookItem extends Component {
                      </Typography>
                   </CardContent>
                </CardActionArea>
-               <CardActions>
+               {onMoveShelf && <CardActions>
                   <IconButton aria-label="options" onClick={this.handleClick} style={{marginLeft: 'auto'}}>
                      <MoreHoriz/>
                   </IconButton>
                   <Menu
-                     id="simple-menu"
+                     id={id}
                      anchorEl={anchorElOptions}
                      keepMounted
                      open={isOptionsOpen}
@@ -71,11 +76,18 @@ class BookItem extends Component {
                      className='BookItem-Options'
                   >
                      <h5>Move to</h5>
-                     <MenuItem onClick={() => this.handleMoveShelf('currentlyReading')}>Currently Reading</MenuItem>
-                     <MenuItem onClick={() => this.handleMoveShelf('wantToRead')}>Want to Read</MenuItem>
-                     <MenuItem onClick={() => this.handleMoveShelf('read')}>Read</MenuItem>
+                     <MenuItem onClick={() => this.handleMoveShelf('currentlyReading')}>
+                        {shelf === 'currentlyReading' ? <CheckCircleIcon/> : <RadioButtonUncheckedIcon/>} Currently
+                        Reading
+                     </MenuItem>
+                     <MenuItem onClick={() => this.handleMoveShelf('wantToRead')}>
+                        {shelf === 'wantToRead' ? <CheckCircleIcon/> : <RadioButtonUncheckedIcon/>} Want to Read
+                     </MenuItem>
+                     <MenuItem onClick={() => this.handleMoveShelf('read')}>
+                        {shelf === 'read' ? <CheckCircleIcon/> : <RadioButtonUncheckedIcon/>} Read
+                     </MenuItem>
                   </Menu>
-               </CardActions>
+               </CardActions>}
             </Card>
          </div>
       );
@@ -84,9 +96,7 @@ class BookItem extends Component {
 
 
 BookItem.propTypes = {
-   title: PropTypes.string.isRequired,
-   subtitle: PropTypes.string.isRequired,
-   imageURL: PropTypes.string,
+   book: PropTypes.object.isRequired,
    onMoveShelf: PropTypes.func
 };
 

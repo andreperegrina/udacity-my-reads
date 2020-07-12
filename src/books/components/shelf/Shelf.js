@@ -15,13 +15,13 @@ const Shelf = ({shelve, books = [], activeCategory, onMoveShelf}) => {
          <h2>{shelve.name}</h2>
          <div className='books'>
             {books.map(book => (
-               <BookItem key={book.id} title={book.title} subtitle={book.authors.join(',')}
+               <BookItem key={book.id} book={book}
+                         shelf={book.shelf}
                          onMoveShelf={(shelf) => {
                             if (onMoveShelf) {
                                onMoveShelf(book, shelf)
                             }
-                         }}
-                         imageURL={book.imageLinks.thumbnail}/>
+                         }}/>
             ))}
             {books.length <= 0 && <span className='placeholder-text'>No books were found here</span>}
          </div>

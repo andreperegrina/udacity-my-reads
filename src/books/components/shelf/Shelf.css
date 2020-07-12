@@ -3,6 +3,7 @@
 
 .Shelf .books {
     display: flex;
+    flex-wrap: wrap;
 }
 
 .Shelf .books > .BookItem {

@@ -21,6 +21,11 @@ const Sidebar = ({categories, onClickCategory, activeCategory}) => {
    );
 };
 
-Sidebar.propTypes = {};
+Sidebar.propTypes = {
+   categories: PropTypes.array,
+   onClickCategory: PropTypes.func,
+   activeCategory: PropTypes.string
+}
+;
 
 export default Sidebar;

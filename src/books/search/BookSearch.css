@@ -1,0 +1,14 @@
+.BookSearch {
+
+}
+
+.BookSearch .books {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.BookSearch .books > .BookItem {
+    padding: 2rem 0;
+    margin-right: 2rem;
+}
+
