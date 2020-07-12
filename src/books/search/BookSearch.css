@@ -1,5 +1,10 @@
 .BookSearch {
+    height: 100%;
+}
 
+.BookSearch .books {
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .BookSearch .books {

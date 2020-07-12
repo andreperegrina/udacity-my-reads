@@ -22,11 +22,14 @@ class Books extends Component {
          const shelves = updateShelvesChildren(this.state.shelves, data);
          this.setState((prevState) => {
             const {books}=prevState;
-            const book = books[bookId];
+            let bookChanged = books[bookId];
+            if(bookChanged==null){
+               bookChanged=book;
+            }
             const newBooks = {
                ...books,
                [bookId]: {
-                  ...book,
+                  ...bookChanged,
                   shelf: shelf
                }
             };

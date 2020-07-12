@@ -73,7 +73,7 @@ Header.propTypes = {
    onClickBack: PropTypes.func,
    searchValue: PropTypes.string
 };
-Header.defaultValue = {
+Header.defaultProps = {
    onSearch: () => {
    },
    onChangeCategory: () => {

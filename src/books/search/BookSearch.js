@@ -5,7 +5,7 @@ import queryString from 'query-string';
 
 // Components
 import Header from "../components/header/Header";
-import BookItem from "../components/book-item/BookItem";
+import Shelf from "../components/shelf/Shelf";
 
 // Utils
 import {search} from "../../utils/BooksAPI";
@@ -19,7 +19,8 @@ class BookSearch extends Component {
       const {q} = queryString.parse(this.props.location.search);
       this.state = {
          books: [],
-         searchValue: q
+         searchValue: q,
+         isFetching: false
       };
    }
 
@@ -32,14 +33,14 @@ class BookSearch extends Component {
    }
 
    handleSearch = (value) => {
+      this.setState({searchValue: value, isFetching: true});
       search(value).then((data = []) => {
          if (data.error != null) {
             data = [];
          }
-         this.setState({books: data})
+         this.setState({books: data, isFetching: false})
       });
       this.props.history.push(`/search?q=${value}`);
-      this.setState({searchValue: value})
    };
 
    handleBack = () => {
@@ -48,19 +49,18 @@ class BookSearch extends Component {
 
    render() {
       const {myBooks, onMoveShelf} = this.props;
-      const {books = [], searchValue} = this.state;
+      const {books = [], searchValue, isFetching} = this.state;
+
+
       return (
          <div className='BookSearch'>
             <Header searchValue={searchValue} onSearch={this.handleSearch} onClickBack={this.handleBack}/>
-            <div className='books'>
-               {books.map(book => (
-                  <BookItem key={book.id} book={book} shelf={myBooks[book.id] ? myBooks[book.id].shelf : ''}
-                            onMoveShelf={(shelf) => {
-                               onMoveShelf(book, shelf)
-                            }}/>
-               ))}
-               {books.length <= 0 && <span className='placeholder-text'>No books were found here</span>}
-            </div>
+            <Shelf books={books} onMoveShelf={onMoveShelf} customShelf={(book)=>{
+               if(myBooks[book.id]){
+                  return myBooks[book.id].shelf;
+               }
+               return book.shelf;
+            }} isFetching={isFetching}/>
          </div>
       );
    }

@@ -13,6 +13,10 @@ const Sidebar = ({categories, onClickCategory, activeCategory}) => {
          <div className='book-category'>
             <h2>Categories</h2>
             <ul>
+               <li className={activeCategory === '' ? 'active' : ''}
+                   onClick={() => onClickCategory('')}>
+                  All
+               </li>
                {categories.map((e) => <li className={activeCategory === e ? 'active' : ''}
                                           onClick={() => onClickCategory(e)} key={e}>{e}</li>)}
             </ul>

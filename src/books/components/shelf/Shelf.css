@@ -1,9 +1,27 @@
 .Shelf {
+    height: 100%;
 }
 
 .Shelf .books {
     display: flex;
     flex-wrap: wrap;
+}
+
+.Shelf .books.center {
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.Shelf .books .loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.Shelf .books .loading .loading-text {
+    margin-top: 1rem;
 }
 
 .Shelf .books > .BookItem {
