@@ -59,7 +59,7 @@ class Books extends Component {
                          onMoveShelf={this.handleMoveShelf}/>
             )}/>
             <Route exact path='/search' render={(props) => (
-               <BookSearch myBooks={books} {...props}/>
+               <BookSearch {...props} myBooks={books} onMoveShelf={this.handleMoveShelf}/>
             )}/>
          </div>
       );

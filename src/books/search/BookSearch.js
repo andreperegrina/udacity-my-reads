@@ -8,12 +8,10 @@ import Header from "../components/header/Header";
 import BookItem from "../components/book-item/BookItem";
 
 // Utils
-import {search, update} from "../../utils/BooksAPI";
+import {search} from "../../utils/BooksAPI";
 
 // Style
 import './BookSearch.css'
-import {updateShelvesChildren} from "../list/BookList.util";
-
 
 class BookSearch extends Component {
    constructor(props) {
@@ -40,20 +38,16 @@ class BookSearch extends Component {
          }
          this.setState({books: data})
       });
+      this.props.history.push(`/search?q=${value}`);
       this.setState({searchValue: value})
    };
-   handleMoveShelf = (book, shelf) => {
-      update(book, shelf).then((data) => {
-         const shelves = updateShelvesChildren(this.state.shelves, data);
-         this.setState({shelves});
-      })
-   };
+
    handleBack = () => {
       this.props.history.push('/');
    };
 
    render() {
-      const {myBooks} = this.props;
+      const {myBooks, onMoveShelf} = this.props;
       const {books = [], searchValue} = this.state;
       return (
          <div className='BookSearch'>
@@ -62,7 +56,7 @@ class BookSearch extends Component {
                {books.map(book => (
                   <BookItem key={book.id} book={book} shelf={myBooks[book.id] ? myBooks[book.id].shelf : ''}
                             onMoveShelf={(shelf) => {
-                               this.handleMoveShelf(book, shelf)
+                               onMoveShelf(book, shelf)
                             }}/>
                ))}
                {books.length <= 0 && <span className='placeholder-text'>No books were found here</span>}
@@ -73,7 +67,8 @@ class BookSearch extends Component {
 }
 
 BookSearch.propTypes = {
-   history: PropTypes.any
+   history: PropTypes.any,
+   onMoveShelf: PropTypes.func,
 };
 
 export default BookSearch;

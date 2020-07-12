@@ -37,7 +37,7 @@ class BookItem extends Component {
 
    render() {
       const {book, onMoveShelf, shelf} = this.props;
-      const {imageLinks, title, authors} = book;
+      const {imageLinks = {}, title, authors = []} = book;
       const subtitle = authors.join(',');
       const imageURL = imageLinks.thumbnail;
       const {anchorElOptions} = this.state;
@@ -49,10 +49,10 @@ class BookItem extends Component {
                <CardActionArea>
                   <CardMedia
                      component="img"
-                     alt="Contemplative Reptile"
+                     alt={title}
                      image={imageURL}
                      height='300px'
-                     title="Contemplative Reptile"
+                     title={title}
                   />
                   <CardContent>
                      <Typography variant="h6" gutterBottom>
@@ -85,6 +85,9 @@ class BookItem extends Component {
                      </MenuItem>
                      <MenuItem onClick={() => this.handleMoveShelf('read')}>
                         {shelf === 'read' ? <CheckCircleIcon/> : <RadioButtonUncheckedIcon/>} Read
+                     </MenuItem>
+                     <MenuItem onClick={() => this.handleMoveShelf('none')}>
+                        {(shelf === '' || shelf === 'none')  ? <CheckCircleIcon/> : <RadioButtonUncheckedIcon/>} None
                      </MenuItem>
                   </Menu>
                </CardActions>}
