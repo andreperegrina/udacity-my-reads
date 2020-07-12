@@ -3,7 +3,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Toolbar from "@material-ui/core/Toolbar";
 import AppBar from "@material-ui/core/AppBar";
-import AccountCircle from '@material-ui/icons/AccountCircle';
 import IconButton from "@material-ui/core/IconButton";
 import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
