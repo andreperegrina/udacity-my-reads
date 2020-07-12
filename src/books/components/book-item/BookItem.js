@@ -20,27 +20,33 @@ import './BookItem.css'
 
 class BookItem extends Component {
    state = {
-      anchorElOptions: null
+      anchorElOptions: null // This state property is being use to storage the dom element to attach the popover menu
    };
-   handleClick = (event) => {
+   handleClickOptions = (event) => {
+      // Storage the dom component that will get attach the option menu
       this.setState({anchorElOptions: event.currentTarget});
    };
-   handleClose = () => {
+   handleCloseOptions = () => {
+      // Remove the dom element from the state after closing the menu
       this.setState({anchorElOptions: null});
    };
    handleMoveShelf = (shelf) => {
       if (this.props.onMoveShelf) {
+         // Calls the onMoveShelf of the parent
          this.props.onMoveShelf(shelf);
       }
-      this.handleClose();
+      // Close the options menu after the user choose a shelf
+      this.handleCloseOptions();
    };
 
    render() {
       const {book, onMoveShelf, shelf} = this.props;
       const {imageLinks = {}, title, authors = []} = book;
+      // Join all the authors in one string separate by ,
       const subtitle = authors.join(',');
       const imageURL = imageLinks.thumbnail;
       const {anchorElOptions} = this.state;
+      // Valid if the menu option is open
       const isOptionsOpen = anchorElOptions != null;
       const id = isOptionsOpen ? 'options-popover' : undefined;
       return (
@@ -64,7 +70,7 @@ class BookItem extends Component {
                   </CardContent>
                </CardActionArea>
                {onMoveShelf && <CardActions>
-                  <IconButton aria-label="options" onClick={this.handleClick} style={{marginLeft: 'auto'}}>
+                  <IconButton aria-label="options" onClick={this.handleClickOptions} style={{marginLeft: 'auto'}}>
                      <MoreHoriz/>
                   </IconButton>
                   <Menu
@@ -72,7 +78,7 @@ class BookItem extends Component {
                      anchorEl={anchorElOptions}
                      keepMounted
                      open={isOptionsOpen}
-                     onClose={this.handleClose}
+                     onClose={this.handleCloseOptions}
                      className='BookItem-Options'
                   >
                      <h5>Move to</h5>

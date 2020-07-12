@@ -9,8 +9,10 @@ import './Shelf.css';
 
 const Shelf = ({shelve, books = [], activeCategory, onMoveShelf, isFetching = false, customShelf}) => {
    if (activeCategory != null && activeCategory !== '') {
+      // In case the user select a category, filter the books by that category
       books = books.filter((e) => e.categories && e.categories.includes(activeCategory));
    }
+   // This variable is to know if the application is searching or the api doesnt return any results
    const isBookShelfEmpty = (!isFetching && books.length <= 0);
    return (
       <div className='Shelf'>

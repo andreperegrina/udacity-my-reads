@@ -5,8 +5,11 @@ const shelfNames = {
    'read': 'Read'
 };
 
-
-// This function extract the categories from the books and return without duplicated
+/**
+ * @description Extract categories from all the books
+ * @param {array} books
+ * @returns {object} Object with all the categories from books
+ */
 export const extractCategoriesFromBooks = (books) => {
    return books.reduce((accum, book) => {
       const {categories = []} = book;
@@ -18,7 +21,12 @@ export const extractCategoriesFromBooks = (books) => {
    }, {});
 };
 
-// Generate an array based on the shelf of the book
+
+/**
+ * @description Extract shelves from all the books
+ * @param {array} books
+ * @returns {object} Object with all the shelves from books with children as books related
+ */
 export const extractShelves = (books) => {
    return books.reduce((accum, book) => {
       const {shelf} = book;
@@ -37,6 +45,13 @@ export const extractShelves = (books) => {
    }, {});
 };
 
+
+/**
+ * @description Update previous shelves with the new children
+ * @param {object} shelves
+ * @param {object} newShelvesChildren
+ * @returns {object} Object of shelves with the children updated
+ */
 export const updateShelvesChildren = (shelves = {}, newShelvesChildren = {}) => {
    return Object.keys(newShelvesChildren).reduce((accum, key) => ({
       ...accum,

@@ -14,9 +14,10 @@ import './Header.css';
 
 // Utils
 
+// This variable is for creating a debounce for when the user start to search
 let debounce;
 
-const Header = ({onSearch, onChangeCategory, onClickBack, searchValue}) => {
+const Header = ({onSearch, onClickBack, searchValue}) => {
    return (
       <div className='Header'>
          <AppBar position="static">
@@ -41,6 +42,7 @@ const Header = ({onSearch, onChangeCategory, onClickBack, searchValue}) => {
                      placeholder="Search…"
                      inputProps={{'aria-label': 'search'}}
                      onChange={(event) => {
+                        // Using debounce to add a delay before the search start
                         if (debounce) {
                            clearTimeout(debounce);
                         }
@@ -48,18 +50,6 @@ const Header = ({onSearch, onChangeCategory, onClickBack, searchValue}) => {
                         debounce = setTimeout(() => onSearch(value), 500);
                      }}
                   />
-               </div>
-               <div style={{flexGrow: 1}}/>
-               <div style={{display: 'flex'}}>
-                  <IconButton
-                     edge="end"
-                     aria-label="account of current user"
-                     aria-haspopup="true"
-                     color="inherit"
-                     onClick={onChangeCategory}
-                  >
-                     <AccountCircle/>
-                  </IconButton>
                </div>
             </Toolbar>
          </AppBar>
@@ -69,7 +59,6 @@ const Header = ({onSearch, onChangeCategory, onClickBack, searchValue}) => {
 
 Header.propTypes = {
    onSearch: PropTypes.func,
-   onChangeCategory: PropTypes.func,
    onClickBack: PropTypes.func,
    searchValue: PropTypes.string
 };

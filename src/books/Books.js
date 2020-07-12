@@ -5,6 +5,8 @@ import {Route} from "react-router-dom";
 // Components
 import BookList from './list/BookList'
 import BookSearch from './search/BookSearch'
+
+// Utils
 import {getAll, update} from "../utils/BooksAPI";
 import {extractCategoriesFromBooks, extractShelves, updateShelvesChildren} from "./list/BookList.util";
 import {convertArrayToObject} from "../utils";
@@ -17,14 +19,16 @@ class Books extends Component {
    };
 
    handleMoveShelf = (book, shelf) => {
-      const bookId=book.id;
-      update(book, shelf).then((data) => {
+      const bookId = book.id;
+      update(book, shelf).then((data) => { // Data contains an object of shelves with the id's of the books that contains
+         // Updates the array of children from the shelves
          const shelves = updateShelvesChildren(this.state.shelves, data);
          this.setState((prevState) => {
-            const {books}=prevState;
+            const {books} = prevState;
             let bookChanged = books[bookId];
-            if(bookChanged==null){
-               bookChanged=book;
+            if (bookChanged == null) {
+               // If it is a new book, use the book object that was send from handleMoveShelf
+               bookChanged = book;
             }
             const newBooks = {
                ...books,

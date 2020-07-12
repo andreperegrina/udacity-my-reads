@@ -22,9 +22,6 @@ class BookList extends Component {
       this.props.history.push(`/search?q=${value}`);
    };
 
-   handleChangeCategory = () => {
-
-   };
 
    handleClickCategory = (value) => {
       this.setState({activeCategory: value === this.state.activeCategory ? '' : value})
@@ -34,13 +31,14 @@ class BookList extends Component {
    render() {
       const {shelves, books, categories, onMoveShelf} = this.props;
       const {activeCategory} = this.state;
+      // Convert the shelves into an array
       const shelfList = convertObjectToArray(shelves);
       return (
          <div className='BooksList'>
             <Sidebar categories={categories} activeCategory={activeCategory}
                      onClickCategory={this.handleClickCategory}/>
             <div className='content'>
-               <Header onChangeCategory={this.handleChangeCategory} onSearch={this.handleSearch}/>
+               <Header onSearch={this.handleSearch}/>
                <Shelves books={books} shelves={shelfList} activeCategory={activeCategory}
                         onMoveShelf={onMoveShelf}/>
             </div>
